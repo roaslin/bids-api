@@ -4,7 +4,8 @@ import com.witbooking.api.persistence.BaseEntity;
 import lombok.*;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -20,9 +21,9 @@ public class LoginEntity extends BaseEntity {
     private String sessionKey;
 
     @NotNull
-    private LocalDateTime validUntil;// 10 minutes valid
+    private LocalDateTime expireDate;// 10 minutes valid
 
     @NotNull
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private UserEntity user;
 }

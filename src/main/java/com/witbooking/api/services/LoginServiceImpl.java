@@ -34,20 +34,17 @@ public class LoginServiceImpl implements LoginService {
         }
 
         // fetch login for user
-        login = Optional.ofNullable(loginRepository.findByUser(user.get()));
+        login = Optional.ofNullable(loginRepository.findFirstByUserOrderByExpireDate(user.get()));
 
         // if there is no login or is expired
-//        if (!login.isPresent() || (LocalDateTime.now().isAfter(login.get().getValidUntil()))) {
-
+        if (!login.isPresent() || login.get().getExpireDate().isBefore(LocalDateTime.now())) {
             LoginEntity newLogin = LoginEntity.builder()
                     .sessionKey(UUID.randomUUID().toString())
-                    .validUntil(LocalDateTime.now().plusMinutes(10))
+                    .expireDate(LocalDateTime.now().plusMinutes(10))
                     .user(user.get()).build();
 
             login = Optional.of(loginRepository.save(newLogin));
-//        }
-
-//        userRepository.save(user.get());
+        }
 
         return login.get().getSessionKey();
     }

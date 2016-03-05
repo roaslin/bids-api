@@ -4,6 +4,7 @@ import com.witbooking.api.persistence.BaseEntity;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 
@@ -17,9 +18,9 @@ public class BidEntity extends BaseEntity {
 
     private BigDecimal amount;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private ItemEntity item;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private UserEntity user;
 }

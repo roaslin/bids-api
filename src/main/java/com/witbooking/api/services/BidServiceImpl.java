@@ -3,15 +3,16 @@ package com.witbooking.api.services;
 import com.witbooking.api.entities.BidEntity;
 import com.witbooking.api.entities.ItemEntity;
 import com.witbooking.api.entities.LoginEntity;
-import com.witbooking.api.entities.UserEntity;
 import com.witbooking.api.repositories.BidRepository;
 import com.witbooking.api.repositories.ItemRepository;
-import com.witbooking.api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BidServiceImpl implements BidService {
@@ -21,9 +22,6 @@ public class BidServiceImpl implements BidService {
 
     @Autowired
     ItemRepository itemRepository;
-
-    @Autowired
-    UserRepository userRepository;
 
     @Override
     public void createBid(int itemID, BigDecimal bidAmount, LoginEntity login) {
@@ -43,15 +41,22 @@ public class BidServiceImpl implements BidService {
                 .user(login.getUser()).build();
 
         // persist bid
-        newBid = bidRepository.save(newBid);
+        bidRepository.save(newBid);
+    }
 
-        // update user
-        UserEntity user = login.getUser();
-        user.getBids().add(newBid);
-        userRepository.save(user);
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> getTopBidListByItemID(int itemID) {
+        ItemEntity item = itemRepository.findOne(itemID);
 
-        // update item
-        item.get().getBidEntities().add(newBid);
-        itemRepository.save(item.get());
+        List<BidEntity> topBidsByItemID = bidRepository.findByItem(item);
+
+        return topBidsByItemID.stream()
+                .map(this::buildBidObject)
+                .collect(Collectors.toList());
+    }
+
+    private String buildBidObject(BidEntity bidEntity) {
+        return bidEntity.getUser().getId() + "\":\"" + bidEntity.getAmount().toString();
     }
 }

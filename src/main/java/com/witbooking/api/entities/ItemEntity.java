@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
@@ -23,5 +23,5 @@ public class ItemEntity  implements Serializable {
     protected int id;
 
     @OneToMany(mappedBy = "item")
-    private Set<BidEntity> bidEntities;
+    private List<BidEntity> bids;
 }
