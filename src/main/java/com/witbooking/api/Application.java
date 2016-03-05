@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Main entry point for the Application.
- *
  */
 @EnableJpaRepositories
 @EnableTransactionManagement
