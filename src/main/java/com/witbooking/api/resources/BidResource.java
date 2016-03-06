@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -41,8 +40,8 @@ public class BidResource {
     }
 
     @RequestMapping(value = "{itemID}/topBidList", method = RequestMethod.GET)
-    public ResponseEntity<List<String>> getTopBidListByItemID(@PathVariable @NotNull int itemID)
+    public ResponseEntity<String> getTopBidListByItemID(@PathVariable @NotNull int itemID)
     {
-        return ResponseEntity.ok(bidService.getTopBidListByItemID(itemID));
+        return ResponseEntity.ok(bidService.getTopBidListByItemID(itemID).toString());
     }
 }

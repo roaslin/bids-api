@@ -17,6 +17,8 @@ import java.util.List;
 @Entity(name = "item")
 public class ItemEntity  implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @NotNull
     @Setter

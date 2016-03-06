@@ -5,6 +5,8 @@ import com.witbooking.api.entities.ItemEntity;
 import com.witbooking.api.entities.LoginEntity;
 import com.witbooking.api.repositories.BidRepository;
 import com.witbooking.api.repositories.ItemRepository;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +48,7 @@ public class BidServiceImpl implements BidService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<String> getTopBidListByItemID(int itemID) {
+    public List<JSONObject> getTopBidListByItemID(int itemID) {
         ItemEntity item = itemRepository.findOne(itemID);
 
         List<BidEntity> topBidsByItemID = bidRepository.findByItem(item);
@@ -56,7 +58,20 @@ public class BidServiceImpl implements BidService {
                 .collect(Collectors.toList());
     }
 
-    private String buildBidObject(BidEntity bidEntity) {
-        return bidEntity.getUser().getId() + "\":\"" + bidEntity.getAmount().toString();
+    private JSONObject buildBidObject(BidEntity bidEntity) {
+        final JSONObject object = new JSONObject();
+        try {
+            object.put(Integer.toString(bidEntity.getUser().getId()), bidEntity.getAmount().toString());
+        } catch (JSONException e) {
+            throw new BidServiceException("Something went wrong creating bid object", e);
+        }
+
+        return object;
+    }
+
+    private static class BidServiceException extends RuntimeException {
+        public BidServiceException(String message, Throwable e) {
+            super(message, e);
+        }
     }
 }

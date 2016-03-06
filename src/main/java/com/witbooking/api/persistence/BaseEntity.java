@@ -13,6 +13,8 @@ import java.io.Serializable;
 @Getter
 public abstract class BaseEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.TABLE)
