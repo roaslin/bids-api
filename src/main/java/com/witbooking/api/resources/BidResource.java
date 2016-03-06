@@ -40,8 +40,7 @@ public class BidResource {
     }
 
     @RequestMapping(value = "{itemID}/topBidList", method = RequestMethod.GET)
-    public ResponseEntity<String> getTopBidListByItemID(@PathVariable @NotNull int itemID)
-    {
+    public ResponseEntity<String> getTopBidListByItemID(@PathVariable @NotNull int itemID) {
         return ResponseEntity.ok(bidService.getTopBidListByItemID(itemID).toString());
     }
 }

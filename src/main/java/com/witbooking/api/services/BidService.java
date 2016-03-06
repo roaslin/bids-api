@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface BidService {
     void createBid(int itemID, BigDecimal bidAmount, LoginEntity login);
+
     List<JSONObject> getTopBidListByItemID(int itemID);
 }

@@ -29,8 +29,8 @@ public class LoginServiceImpl implements LoginService {
         if (!user.isPresent()) {
             // create user if does not exist
             user = Optional.of(userRepository.save(UserEntity.builder()
-                    .id(Integer.valueOf(userID))
-                    .build()));
+                                                             .id(Integer.valueOf(userID))
+                                                             .build()));
         }
 
         // fetch login for user
@@ -39,9 +39,9 @@ public class LoginServiceImpl implements LoginService {
         // if there is no login or is expired
         if (!login.isPresent() || login.get().getExpireDate().isBefore(LocalDateTime.now())) {
             LoginEntity newLogin = LoginEntity.builder()
-                    .sessionKey(UUID.randomUUID().toString())
-                    .expireDate(LocalDateTime.now().plusMinutes(10))
-                    .user(user.get()).build();
+                                              .sessionKey(UUID.randomUUID().toString())
+                                              .expireDate(LocalDateTime.now().plusMinutes(10))
+                                              .user(user.get()).build();
 
             login = Optional.of(loginRepository.save(newLogin));
         }

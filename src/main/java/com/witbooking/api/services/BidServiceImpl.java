@@ -38,9 +38,9 @@ public class BidServiceImpl implements BidService {
 
         // create new bid
         BidEntity newBid = BidEntity.builder()
-                .amount(bidAmount)
-                .item(item.get())
-                .user(login.getUser()).build();
+                                    .amount(bidAmount)
+                                    .item(item.get())
+                                    .user(login.getUser()).build();
 
         // persist bid
         bidRepository.save(newBid);
@@ -54,8 +54,8 @@ public class BidServiceImpl implements BidService {
         List<BidEntity> topBidsByItemID = bidRepository.findByItem(item);
 
         return topBidsByItemID.stream()
-                .map(this::buildBidObject)
-                .collect(Collectors.toList());
+                              .map(this::buildBidObject)
+                              .collect(Collectors.toList());
     }
 
     private JSONObject buildBidObject(BidEntity bidEntity) {

@@ -1,0 +1,105 @@
+= WitBooking Bid API Documentation
+:doctype: book
+:compat-mode:
+:page-layout!:
+:toc: right
+:toclevels: 2
+:sectanchors:
+:sectlinks:
+:sectnums:
+:linkattrs:
+:source-highlighter: highlightjs
+
+[[overview]]
+= Overview
+
+[[overview-general]]
+== General
+
+[[overview-http-verbs]]
+=== HTTP verbs
+
+We try to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource (idempotent)
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to update an existing resource (idempotent)
+
+| `PATCH`
+| Used to update an existing resource, including partial updates
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+[[overview-http-status]]
+=== HTTP status codes
+
+|===
+| Code | Meaning | Description
+
+| 200
+| OK
+| The request has succeeded.
+
+| 201
+| Created
+| The request has been fulfilled and resulted in a new resource being created. The newly created
+resource can be referenced by the URI(s) returned in the entity of the response, with the most
+specific URI for the resource given by a Location header field.
+
+| 400
+| Bad Request
+| The request could not be understood by the server due to malformed syntax. The client SHOULD NOT
+repeat the request without modifications. Additional information may be provided in the response.
+
+| 401
+| Unauthorized
+| The request requires user authentication. The client MAY repeat the request with a suitable
+Authorization header field.
+
+| 403
+| Forbidden
+| The server understood the request, but is refusing to fulfill it. Authorization will not help
+and the request SHOULD NOT be repeated.
+
+| 500
+| Internal Server Error
+| The server encountered an unexpected condition which prevented it from fulfilling the request.
+The client MAY repeat the request.
+
+| 503
+| Service Unavailable
+| The server is currently unable to handle the request due to a temporary overloading or maintenance
+of the server.
+|===
+
+[[overview-version-prefix]]
+=== Prefixes
+
+All URLs are prefixed by `/`.
+
+[[overview-trailing-slash]]
+=== Trailing Slash
+
+A trailing slash is not necessary and should usually be omitted.
+
+[[overview-keywords]]
+=== Bids
+
+Users and items are created Ad-hoc for each request. Remember that in order to place a bid you have to be logged in and
+assigned a sessionKey. Session keys are valid for a period of 10 minutes and returned everytime you have requested a
+login access. Only sessions keys are renewed if expired.
+
+[[resources]]
+= Resources
+include::bid.asciidoc[]

@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity(name = "item")
-public class ItemEntity  implements Serializable {
+public class ItemEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

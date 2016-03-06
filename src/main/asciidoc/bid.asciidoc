@@ -1,0 +1,46 @@
+[[resources-bid]]
+== Test - Bid
+
+Bid resource is used to place new bids and get top bids per item.
+
+[[resources-bid-post]]
+=== Post bid
+
+`POST /{itemID}/bid?sessionKey=<sessionKey>`
+
+Creates new bid into the database.
+
+include::{snippets}/bid/post/request-parameters.adoc[]
+include::{snippets}/bid/post/path-parameters.adoc[]
+
+===== Request structure
+
+None.
+
+===== Response structure
+
+None.
+
+===== Example request/response
+
+include::{snippets}/bid/post/curl-request.adoc[]
+include::{snippets}/bid/post/http-response.adoc[]
+
+
+[[resources-bid-get]]
+=== Get a list of top bids for a given itemID.
+
+`GET /{itemID}/topBidList`
+
+Get an all bids for a given itemID, in descendant order by max amount per user.
+
+include::{snippets}/bid/get/path-parameters.adoc[]
+
+===== Response structure
+
+include::{snippets}/bid/get/response-fields.adoc[]
+
+===== Example request/response
+
+include::{snippets}/bid/get/curl-request.adoc[]
+include::{snippets}/bid/get/http-response.adoc[]
