@@ -34,13 +34,13 @@ include::{snippets}/bid/post/http-response.adoc[]
 
 Get an all bids for a given itemID, in descendant order by max amount per user.
 
-include::{snippets}/bid/get/path-parameters.adoc[]
+include::{snippets}/bid/get/topBidList/path-parameters.adoc[]
 
 ===== Response structure
 
-include::{snippets}/bid/get/response-fields.adoc[]
+include::{snippets}/bid/get/topBidList/response-fields.adoc[]
 
 ===== Example request/response
 
-include::{snippets}/bid/get/curl-request.adoc[]
-include::{snippets}/bid/get/http-response.adoc[]
+include::{snippets}/bid/get/topBidList/curl-request.adoc[]
+include::{snippets}/bid/get/topBidList/http-response.adoc[]

@@ -1,0 +1,26 @@
+[[resources-login]]
+== Test - Login
+
+Bid resource is used to place new bids and get top bids per item.
+
+[[resources-login-get]]
+=== Get login
+
+`Get /{userID}/login`
+
+Logs in user creating a valid <sessionKey>.
+
+include::{snippets}/login/get/path-parameters.adoc[]
+
+===== Request structure
+
+None.
+
+===== Response structure
+
+A valid sessionKey string.
+
+===== Example request/response
+
+include::{snippets}/login/get/curl-request.adoc[]
+include::{snippets}/login/get/http-response.adoc[]

@@ -21,7 +21,7 @@ public class LoginEntity extends BaseEntity {
     private String sessionKey;
 
     @NotNull
-    private LocalDateTime expireDate;// 10 minutes valid
+    private LocalDateTime expireDate;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)

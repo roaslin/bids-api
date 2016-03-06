@@ -102,4 +102,5 @@ login access. Only sessions keys are renewed if expired.
 
 [[resources]]
 = Resources
+include::login.asciidoc[]
 include::bid.asciidoc[]

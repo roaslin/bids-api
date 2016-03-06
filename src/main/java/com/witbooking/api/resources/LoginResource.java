@@ -18,7 +18,7 @@ public class LoginResource {
     private LoginService loginService;
 
     @RequestMapping(value = "{userID}/login", method = GET)
-    public ResponseEntity<String> getLoginSessionToken(@PathVariable @NotNull String userID) {
+    public ResponseEntity<String> getLoginSessionKey(@PathVariable @NotNull String userID) {
         return ResponseEntity.ok(loginService.getSessionToken(userID));
     }
 }
