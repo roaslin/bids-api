@@ -11,12 +11,20 @@ import javax.validation.constraints.NotNull;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+/**
+ * Login resource endpoint.
+ */
 @RestController
 public class LoginResource {
 
     @Autowired
     private LoginService loginService;
 
+    /**
+     * Resource for users to be logged in.
+     * @param userID userID.
+     * @return A random UUID string.
+     */
     @RequestMapping(value = "{userID}/login", method = GET)
     public ResponseEntity<String> getLoginSessionKey(@PathVariable @NotNull String userID) {
         return ResponseEntity.ok(loginService.getSessionToken(userID));

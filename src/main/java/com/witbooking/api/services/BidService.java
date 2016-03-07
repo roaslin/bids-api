@@ -1,13 +1,13 @@
 package com.witbooking.api.services;
 
-import com.witbooking.api.entities.LoginEntity;
 import org.codehaus.jettison.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 public interface BidService {
-    void createBid(int itemID, BigDecimal bidAmount, LoginEntity login);
+    Optional<String> createBid(int itemID, BigDecimal bidAmount, String sessionKey);
 
     List<JSONObject> getTopBidListByItemID(int itemID);
 }

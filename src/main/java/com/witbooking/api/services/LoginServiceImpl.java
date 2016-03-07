@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Login's service.
+ */
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -20,6 +23,11 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Checks if user has a valid login and sessionKey, otherwise it is created.
+     * @param userID userID.
+     * @return  A random UUID string.
+     */
     @Override
     public String getSessionToken(String userID) {
 
